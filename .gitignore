@@ -1,0 +1,6 @@
+.git/
+.ipynb_checlpoints/
+venv_dev/
+__pycache__/
+tests/
+   __pycache__/
