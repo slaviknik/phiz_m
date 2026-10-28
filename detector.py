@@ -145,3 +145,22 @@ class Detector:
         ax.set_title(f'Равномерное распределение {det.pmt_number} ФЭУ по сфере R={det.radius} м')
         plt.tight_layout()
         plt.show()
+
+    def point_in_pmt(self, point, return_index: bool = False, tol: float = 1e-12):
+        p = np.asarray(point, dtype=float).reshape(3)
+        p_norm = np.linalg.norm(p)
+        if p_norm < 1e-18:
+            raise ValueError('point')
+        u_p = p / p_norm
+        u_c = self.pmt_centers / np.linalg.norm(self.pmt_centers, axis=1, keepdims=True)
+        cos_gamma = np.clip(u_p @ u_c.T, -1.0, 1.0)
+        gamma = np.arccos(cos_gamma)
+        alpha = np.arctan2(self.pmt_radius, self.radius)
+        mask = gamma <= alpha + tol
+        idx = np.where(mask)[0]
+        if return_index:
+            return idx
+        return idx.size > 0
+
+    def which_pmt(self, point, tol: float = 1e-12):
+        return self.point_in_pmt(point, return_index=True, tol=tol)
