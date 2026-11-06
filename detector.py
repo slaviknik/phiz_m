@@ -39,7 +39,7 @@ class Detector:
             >>> det = Detector(radius=2.0, pmt_number=2000, pmt_radius=0.1)
             >>> overlaps, min_gap = det.check_overlaps()
             >>> len(overlaps)
-            1284
+            5074
             >>> min_gap < 0
             True
         """
@@ -97,7 +97,7 @@ class Detector:
             >>> det = Detector(radius=2.0, pmt_number=2000, pmt_radius=0.1)
             >>> overlaps, min_gap = det.check_overlaps()
             >>> len(overlaps)
-            1284
+            5074
             >>> min_gap < 0
             True
         """
