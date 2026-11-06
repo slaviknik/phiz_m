@@ -70,3 +70,4 @@ chi2_crit_999_dof9 - критическое значение χ² (9 степе�
 pytest tests
 pytest tests -v
 pytest tests --doctest-modules detector.py source.py coordinates.py
+
