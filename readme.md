@@ -13,29 +13,6 @@ Source.ipynb - содержит результаты выполненного з
 (Y = 10000 фотонов/МэВ) и метод розыгрыша начальных направлений фотонов
 для события с энергией E, число фотонов N = Y·E (линейный выход по энергии)
 
-## Окружение
-Рабочих интерпретаторов два, в обоих есть numpy, matplotlib, k3d, ipywidgets, pytest.
-
-venv_dev - проектное окружение; версии зафиксированы в requirements.txt (pip freeze).
-Запуск: source venv_dev/bin/activate, затем venv_dev/bin/jupyter lab.
-Ноутбуки используют ядро "Python 3 (phiz_m)" -> venv_dev/bin/python -m ipykernel_launcher
-(kernelspec зарегистрирован командой venv_dev/bin/python -m ipykernel install --user
---name phiz_m --display-name "Python 3 (phiz_m)").
-
-системный python3 - пользовательское окружение (~/.local), запуск: jupyter lab,
-ядро "python3".
-
-Конфликт версий matplotlib устранён: системный пакет Debian python3-matplotlib 3.5.1
-содержит файл /usr/lib/python3/dist-packages/matplotlib-3.5.1-nspkg.pth, который при
-старте интерпретатора подменяет пакет mpl_toolkits устаревшей копией. Вместе с
-matplotlib 3.10+ из pip это давало ImportError (matplotlib.docstring) и неработающую
-проекцию "3d" в ноутбуке. Исправлено на уровне пользовательского окружения:
-~/.local/lib/python3.10/site-packages/mpl_toolkits/__init__.py - каталог объявлен
-обычным пакетом, поэтому pip-версия побеждает по порядку sys.path;
-~/.local/lib/python3.10/site-packages/usercustomize.py - отменяет подмену из .pth.
-После правки уже запущенные ядра JupyterLab нужно перезапустить (Kernel -> Restart),
-иначе они продолжают работать со старым окружением в памяти.
-
 ## Тесты
 Автотесты написаны на pytest, каждый автотест оформлен отдельным файлом
 в каталоге tests/:
